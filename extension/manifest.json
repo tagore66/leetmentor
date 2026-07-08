@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "LeetMentor AI Companion",
+  "version": "1.0.0",
+  "description": "Your AI coding companion for LeetCode and competitive programming.",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "cookies",
+    "identity"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "https://leetcode.com/*",
+    "https://codeforces.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/*",
+        "https://codeforces.com/*",
+        "http://localhost:5173/*"
+      ],
+      "js": ["src/content.tsx"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

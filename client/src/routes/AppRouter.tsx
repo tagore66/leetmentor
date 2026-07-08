@@ -4,9 +4,8 @@ import AIWorkspace from "../pages/AIWorkspace";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Dashboard from "../pages/Dashboard";
-import AIChat from "../pages/AIChat";
 import NotFound from "../pages/NotFound";
+import Account from "../pages/Account";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 
@@ -22,15 +21,6 @@ export default function AppRouter() {
         <Route path="/register" element={<Register />} />
 
         <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
           path="/ai"
           element={
             <ProtectedRoute>
@@ -40,13 +30,17 @@ export default function AppRouter() {
         />
 
         <Route
-          path="/chat"
+          path="/account"
           element={
             <ProtectedRoute>
-              <AIChat />
+              <Account />
             </ProtectedRoute>
           }
         />
+        
+        {/* Redirect old routes */}
+        <Route path="/profile" element={<Account />} />
+        <Route path="/settings" element={<Account />} />
 
         <Route path="*" element={<NotFound />} />
 

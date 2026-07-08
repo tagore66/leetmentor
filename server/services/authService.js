@@ -37,7 +37,23 @@ const loginUser = async (email, password) => {
 
     return user;
 };
+const googleLogin = async (name, email, picture) => {
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        user = await User.create({
+            name,
+            email,
+            profilePicture: picture || "",
+            provider: "google",
+        });
+    }
+
+    return user;
+};
+
 module.exports = {
     registerUser,
     loginUser,
+    googleLogin,
 };

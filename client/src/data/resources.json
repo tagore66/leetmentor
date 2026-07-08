@@ -1,0 +1,90 @@
+[
+  {
+    "id": "striver-a2z",
+    "title": "Striver A2Z DSA Sheet",
+    "description": "The ultimate comprehensive guide to mastering Data Structures and Algorithms from scratch.",
+    "category": "DSA",
+    "difficulty": "All Levels",
+    "progress": 0,
+    "totalItems": 455,
+    "icon": "Layers",
+    "status": "available"
+  },
+  {
+    "id": "neetcode-150",
+    "title": "NeetCode 150",
+    "description": "A curated list of 150 essential LeetCode problems to ace your technical interviews.",
+    "category": "DSA",
+    "difficulty": "Medium",
+    "progress": 0,
+    "totalItems": 150,
+    "icon": "Target",
+    "status": "available"
+  },
+  {
+    "id": "blind-75",
+    "title": "Blind 75",
+    "description": "The classic 75 most frequently asked technical interview questions.",
+    "category": "DSA",
+    "difficulty": "Medium",
+    "progress": 0,
+    "totalItems": 75,
+    "icon": "Eye",
+    "status": "available"
+  },
+  {
+    "id": "system-design",
+    "title": "System Design Mastery",
+    "description": "Learn to design scalable systems, databases, and microservices architecture.",
+    "category": "Architecture",
+    "difficulty": "Hard",
+    "progress": 0,
+    "totalItems": 40,
+    "icon": "Server",
+    "status": "coming_soon"
+  },
+  {
+    "id": "sql-50",
+    "title": "Top 50 SQL Queries",
+    "description": "Master joins, subqueries, and window functions for database interviews.",
+    "category": "Database",
+    "difficulty": "Easy/Medium",
+    "progress": 0,
+    "totalItems": 50,
+    "icon": "Database",
+    "status": "coming_soon"
+  },
+  {
+    "id": "core-cs",
+    "title": "Core CS Fundamentals",
+    "description": "Operating Systems, Computer Networks, and DBMS interview questions.",
+    "category": "Theory",
+    "difficulty": "Medium",
+    "progress": 0,
+    "totalItems": 120,
+    "icon": "Cpu",
+    "status": "coming_soon"
+  },
+  {
+    "id": "company-wise",
+    "title": "Company-wise Questions",
+    "description": "Targeted problem sets for FAANG, Microsoft, Uber, and more.",
+    "category": "Interview",
+    "difficulty": "Variable",
+    "progress": 0,
+    "totalItems": 300,
+    "icon": "Building2",
+    "status": "coming_soon"
+  },
+  {
+    "id": "cheat-sheets",
+    "title": "Algorithm Cheat Sheets",
+    "description": "Quick reference guides for sorting, searching, DP, and graph algorithms.",
+    "category": "Reference",
+    "difficulty": "All Levels",
+    "progress": 0,
+    "totalItems": 15,
+    "icon": "FileText",
+    "status": "available"
+  }
+]
