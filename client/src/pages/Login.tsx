@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -12,8 +12,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  import { useEffect } from "react";
-  
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
