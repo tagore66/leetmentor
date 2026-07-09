@@ -51,7 +51,7 @@ export default function ChatWindow({ messages, loading, selectedMode, onSuggesti
               className="text-center"
             >
               <div className="w-16 h-16 bg-white rounded-2xl mx-auto flex items-center justify-center shadow-sm mb-8">
-                <div className="w-7 h-7 bg-black rounded-md"></div>
+                <Code2 size={28} strokeWidth={2.5} className="text-black" />
               </div>
               <h1 className="text-3xl md:text-4xl font-medium text-white mb-3 tracking-tight">
                 👋 Welcome back, {user?.name ? user.name.split(" ")[0] : "Developer"}

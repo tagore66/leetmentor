@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "../ui/Button";
+import { Code2 } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -18,7 +19,9 @@ export default function Navbar() {
         onClick={() => navigate(user ? "/ai" : "/")}
         className="text-lg font-semibold tracking-tight cursor-pointer flex items-center gap-2"
       >
-        <div className="w-5 h-5 bg-white rounded-sm"></div>
+        <div className="w-6 h-6 bg-white rounded-[7px] flex items-center justify-center">
+          <Code2 size={14} strokeWidth={2.5} className="text-black" />
+        </div>
         LeetMentor
       </h1>
 

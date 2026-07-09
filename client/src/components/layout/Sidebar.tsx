@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { getConversations, deleteConversation, updateConversation } from "../../services/conversationService";
-import { Search, Plus, MessageSquare, Trash2, Edit2, Pin, PinOff, PanelLeftClose, User, LogOut, ChevronUp, Check, X, CreditCard, Keyboard, Palette, Puzzle, BarChart2 } from "lucide-react";
+import { Search, Plus, MessageSquare, Trash2, Edit2, Pin, PinOff, PanelLeftClose, User, LogOut, ChevronUp, Check, X, CreditCard, Keyboard, Palette, Puzzle, BarChart2, Code2 } from "lucide-react";
 import { IconButton } from "../ui/IconButton";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
@@ -226,8 +226,8 @@ export default function Sidebar({ currentConversationId, onSelectConversation, o
       <div className="p-6 pb-4 w-80">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-white rounded-md flex items-center justify-center">
-              <div className="w-2.5 h-2.5 bg-black rounded-sm"></div>
+            <div className="w-6 h-6 bg-white rounded-[7px] flex items-center justify-center">
+              <Code2 size={14} strokeWidth={2.5} className="text-black" />
             </div>
             <h1 className="text-lg font-semibold tracking-tight">LeetMentor</h1>
           </div>
