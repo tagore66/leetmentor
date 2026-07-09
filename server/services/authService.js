@@ -2,6 +2,17 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const registerUser = async (name, email, password) => {
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        throw new Error("Invalid email format");
+    }
+
+    // Validate password
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+        throw new Error("Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character");
+    }
 
     const existingUser = await User.findOne({ email });
 

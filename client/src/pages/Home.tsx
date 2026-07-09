@@ -256,7 +256,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Ready to ace your next interview?</h2>
           <p className="text-neutral-400 mb-10 text-lg">Join thousands of developers upgrading their interview preparation with AI.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-             {isExtensionInstalled ? (
+             {isExtensionInstalled && user ? (
                 <div className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-8 py-4 rounded-full font-medium flex items-center gap-2 cursor-default">
                   <CheckCircle2 size={18} />
                   Extension Installed

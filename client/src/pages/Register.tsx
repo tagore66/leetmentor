@@ -14,9 +14,42 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const calculateStrength = (pass: string) => {
+    if (!pass) return 0;
+    let score = 0;
+    if (pass.length >= 8) score += 1;
+    if (/[a-z]/.test(pass) && /[A-Z]/.test(pass)) score += 1;
+    if (/\d/.test(pass)) score += 1;
+    if (/[^A-Za-z0-9]/.test(pass)) score += 1;
+    return score;
+  };
+
+  const getStrengthData = (score: number) => {
+    if (score === 0) return { text: "", color: "bg-neutral-800", labelColor: "text-transparent" };
+    if (score === 1) return { text: "Weak", color: "bg-red-500", labelColor: "text-red-400" };
+    if (score === 2) return { text: "Fair", color: "bg-orange-500", labelColor: "text-orange-400" };
+    if (score === 3) return { text: "Good", color: "bg-yellow-500", labelColor: "text-yellow-400" };
+    return { text: "Strong", color: "bg-green-500", labelColor: "text-green-400" };
+  };
+
+  const strengthScore = calculateStrength(password);
+  const strengthData = getStrengthData(strengthScore);
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (strengthScore < 4) {
+      setError("Password must be strong (at least 8 chars, uppercase, lowercase, number, special char).");
+      return;
+    }
+
     try {
       await api.post("/auth/register", { name, email, password });
       
@@ -99,14 +132,34 @@ export default function Register() {
             required
           />
 
-          <input
-            type="password"
-            className="w-full p-3.5 rounded-xl bg-neutral-900/50 border border-neutral-800 outline-none focus:border-neutral-600 focus:bg-neutral-900 text-neutral-100 transition-all text-sm placeholder:text-neutral-500"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div>
+            <input
+              className="w-full p-3.5 rounded-xl bg-neutral-900/50 border border-neutral-800 outline-none focus:border-neutral-600 focus:bg-neutral-900 text-neutral-100 transition-all text-sm placeholder:text-neutral-500"
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {password && (
+              <div className="mt-2">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-[11px] text-neutral-500 font-medium tracking-wide uppercase">Password Strength</span>
+                  <span className={`text-[11px] font-bold ${strengthData.labelColor}`}>{strengthData.text}</span>
+                </div>
+                <div className="flex gap-1 h-1 w-full">
+                  {[1, 2, 3, 4].map((level) => (
+                    <div 
+                      key={level} 
+                      className={`flex-1 rounded-full transition-colors duration-300 ${strengthScore >= level ? strengthData.color : 'bg-neutral-800'}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+
 
           <button
             className="w-full bg-white text-black py-3.5 mt-2 rounded-xl font-medium text-sm hover:bg-neutral-200 transition-colors"
