@@ -94,7 +94,7 @@ export default function ContentApp() {
     setAuthError("");
     setIsLoggingIn(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("https://leetmentor-ltjj.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -120,7 +120,7 @@ export default function ContentApp() {
     setAuthError("");
     setIsLoggingIn(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch("https://leetmentor-ltjj.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -169,7 +169,7 @@ export default function ContentApp() {
           const urlParams = new URLSearchParams(new URL(redirectUrl).hash.substring(1));
           const idToken = urlParams.get("id_token");
           if (idToken) {
-            const res = await fetch("http://localhost:5000/api/auth/google", {
+            const res = await fetch("https://leetmentor-ltjj.onrender.com/api/auth/google", {
               method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: idToken })
             });
             const data = await res.json();
@@ -304,7 +304,7 @@ export default function ContentApp() {
       
       const { leetai_token } = await chrome.storage.local.get("leetai_token");
       
-      const res = await fetch("http://localhost:5000/api/ai/ask", {
+      const res = await fetch("https://leetmentor-ltjj.onrender.com/api/ai/ask", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
