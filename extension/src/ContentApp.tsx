@@ -148,14 +148,7 @@ export default function ContentApp() {
     setAuthError("");
     setIsLoggingIn(true);
     try {
-      const clientId = "dummy_client_id_for_now"; 
-      if (clientId === "dummy_client_id_for_now") {
-         setTimeout(() => {
-            setAuthError("Google Login requires a valid Client ID configured in the backend.");
-            setIsLoggingIn(false);
-         }, 800);
-         return;
-      }
+      const clientId = "670784360825-lmtntoth1cevhe7t047b9jkbk9elglqk.apps.googleusercontent.com";
       
       const redirectUri = `https://${chrome.runtime.id}.chromiumapp.org/`;
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=id_token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=openid%20email%20profile&nonce=random`;
@@ -189,12 +182,42 @@ export default function ContentApp() {
   };
 
   const handleGithubLogin = () => {
-     setAuthError("");
-     setIsLoggingIn(true);
-     setTimeout(() => {
-        setAuthError("GitHub Login endpoint not yet implemented in backend.");
-        setIsLoggingIn(false);
-     }, 800);
+    setAuthError("");
+    setIsLoggingIn(true);
+    
+    const extId = chrome.runtime.id;
+    const authUrl = `https://leetmentor-ltjj.onrender.com/api/auth/github?source=extension&id=${extId}`;
+
+    chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, async (redirectUrl) => {
+        if (chrome.runtime.lastError || !redirectUrl) {
+          setAuthError(chrome.runtime.lastError?.message || "GitHub Login cancelled");
+          setIsLoggingIn(false);
+          return;
+        }
+        
+        const urlParams = new URLSearchParams(new URL(redirectUrl).search);
+        const token = urlParams.get("token");
+        
+        if (token) {
+          chrome.storage.local.set({ leetai_token: token }, () => {
+            fetch("https://leetmentor-ltjj.onrender.com/api/auth/profile", {
+              headers: { Authorization: `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) {
+                setIsAuthenticated(true);
+                setUserData(data.user);
+              }
+            })
+            .catch(() => setAuthError("Failed to fetch profile"))
+            .finally(() => setIsLoggingIn(false));
+          });
+        } else {
+          setAuthError("Failed to get token from GitHub");
+          setIsLoggingIn(false);
+        }
+    });
   };
 
   useEffect(() => {
