@@ -36,6 +36,20 @@ chrome.runtime.onMessage.addListener((request: any, _sender: any, sendResponse: 
     });
     return true;
   }
+  
+  if (request.type === "LAUNCH_WEB_AUTH_FLOW") {
+    chrome.identity.launchWebAuthFlow(
+      { url: request.url, interactive: true },
+      (redirectUrl) => {
+        if (chrome.runtime.lastError) {
+          sendResponse({ success: false, error: chrome.runtime.lastError.message });
+        } else {
+          sendResponse({ success: true, redirectUrl });
+        }
+      }
+    );
+    return true; // Keep channel open for async response
+  }
 });
 
 async function handleApiRequest(request: any) {

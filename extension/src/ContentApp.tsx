@@ -153,12 +153,13 @@ export default function ContentApp() {
       const redirectUri = `https://${chrome.runtime.id}.chromiumapp.org/`;
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=id_token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=openid%20email%20profile&nonce=random`;
 
-      chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, async (redirectUrl) => {
-          if (chrome.runtime.lastError || !redirectUrl) {
-            setAuthError(chrome.runtime.lastError?.message || "Google Login cancelled");
+      chrome.runtime.sendMessage({ type: "LAUNCH_WEB_AUTH_FLOW", url: authUrl }, async (response) => {
+          if (!response || !response.success || !response.redirectUrl) {
+            setAuthError(response?.error || chrome.runtime.lastError?.message || "Google Login cancelled");
             setIsLoggingIn(false);
             return;
           }
+          const redirectUrl = response.redirectUrl;
           const urlParams = new URLSearchParams(new URL(redirectUrl).hash.substring(1));
           const idToken = urlParams.get("id_token");
           if (idToken) {
@@ -171,9 +172,14 @@ export default function ContentApp() {
                 setIsAuthenticated(true);
                 setUserData(data.user);
               });
-            } else setAuthError(data.message || "Google Login failed");
+            } else {
+              setAuthError(data.message || "Google Authentication failed");
+              setIsLoggingIn(false);
+            }
+          } else {
+            setAuthError("No ID token returned");
+            setIsLoggingIn(false);
           }
-          setIsLoggingIn(false);
       });
     } catch (err: any) {
       setAuthError(err.message);
@@ -188,13 +194,14 @@ export default function ContentApp() {
     const extId = chrome.runtime.id;
     const authUrl = `https://leetmentor-ltjj.onrender.com/api/auth/github?source=extension&id=${extId}`;
 
-    chrome.identity.launchWebAuthFlow({ url: authUrl, interactive: true }, async (redirectUrl) => {
-        if (chrome.runtime.lastError || !redirectUrl) {
-          setAuthError(chrome.runtime.lastError?.message || "GitHub Login cancelled");
+    chrome.runtime.sendMessage({ type: "LAUNCH_WEB_AUTH_FLOW", url: authUrl }, async (response) => {
+        if (!response || !response.success || !response.redirectUrl) {
+          setAuthError(response?.error || chrome.runtime.lastError?.message || "GitHub Login cancelled");
           setIsLoggingIn(false);
           return;
         }
         
+        const redirectUrl = response.redirectUrl;
         const urlParams = new URLSearchParams(new URL(redirectUrl).search);
         const token = urlParams.get("token");
         
