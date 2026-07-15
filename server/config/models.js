@@ -1,6 +1,6 @@
 const MODELS = [
   {
-    id: "deepseek/deepseek-chat-v3-0324",
+    id: "deepseek/deepseek-chat",
     name: "DeepSeek V3",
     provider: "DeepSeek",
     type: "free",

@@ -8,7 +8,7 @@ const askAI = async (req, res) => {
         const MODELS = require("../config/models");
 
         // Validate the requested model against the backend configuration
-        let selectedModel = "deepseek/deepseek-chat-v3-0324"; // fallback default
+        let selectedModel = "deepseek/deepseek-chat"; // fallback default
         const requestedModel = MODELS.find(m => m.id === model && m.enabled);
         if (requestedModel) {
             selectedModel = requestedModel.id;
@@ -120,7 +120,7 @@ CRITICAL RULES:
 
         // Asynchronously generate a smart title in the background
         axios.post("https://openrouter.ai/api/v1/chat/completions", {
-            model: "deepseek/deepseek-chat-v3-0324",
+            model: "deepseek/deepseek-chat",
             messages: [{ role: "user", content: `Generate a very short 3 to 4 word descriptive title for this prompt. Do not use quotes, punctuation, or generic greetings: ${prompt}` }]
             }, {
                 headers: { Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}` }
