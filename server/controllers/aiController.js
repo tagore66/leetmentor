@@ -90,17 +90,27 @@ CRITICAL RULES:
             { role: "user", content: userContent }
         ];
 
+        let apiUrl = "https://openrouter.ai/api/v1/chat/completions";
+        let apiToken = process.env.OPENROUTER_API_KEY;
+        let requestModel = selectedModel;
+
+        if (selectedModel === "google/gemini-pro-1.5") {
+            apiUrl = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+            apiToken = process.env.GEMINI_API_KEY;
+            requestModel = "gemini-1.5-pro";
+        }
+
         const response = await axios({
             method: 'post',
-            url: "https://openrouter.ai/api/v1/chat/completions",
+            url: apiUrl,
             data: {
-                model: selectedModel,
+                model: requestModel,
                 messages: openRouterMessages,
                 max_tokens: 1500,
                 stream: req.body.stream === true
             },
             headers: {
-                Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                Authorization: `Bearer ${apiToken}`,
                 "Content-Type": "application/json",
             },
             responseType: req.body.stream ? 'stream' : 'json'

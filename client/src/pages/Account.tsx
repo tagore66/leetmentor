@@ -249,6 +249,7 @@ export default function Account() {
                     className="w-full bg-black border border-neutral-800 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-neutral-600 transition-colors cursor-pointer"
                   >
                     <option value="deepseek/deepseek-chat-v3-0324">DeepSeek V3 (Default)</option>
+                    <option value="google/gemini-pro-1.5">Gemini 1.5 Pro</option>
                     <option value="openai/gpt-4o">GPT-4o (Pro)</option>
                     <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Pro)</option>
                   </select>
@@ -376,7 +377,7 @@ export default function Account() {
                 
                 <ul className="space-y-3 mb-8">
                   <li className="text-sm text-neutral-400 flex items-center gap-2">
-                    <div className="w-1 h-1 rounded-full bg-neutral-600"></div> DeepSeek V3 Model Access
+                    <div className="w-1 h-1 rounded-full bg-neutral-600"></div> DeepSeek V3 & Gemini Model Access
                   </li>
                   <li className="text-sm text-neutral-400 flex items-center gap-2">
                     <div className="w-1 h-1 rounded-full bg-neutral-600"></div> Standard Response Times

@@ -27,7 +27,7 @@ const MODELS = [
     id: "google/gemini-pro-1.5",
     name: "Gemini 1.5 Pro",
     provider: "Google",
-    type: "pro",
+    type: "free",
     enabled: true,
     description: "Massive context window for full-system design."
   }

@@ -33,7 +33,7 @@ export default function Home() {
   const faqs = [
     { q: "Does this write the code for me?", a: "No. LeetMentor is designed to teach you how to think, not spoon-feed you answers. It acts as a Socratic mentor, guiding you towards the solution with hints, complexity analysis, and edge cases." },
     { q: "Which platforms are supported?", a: "Currently, the Chrome Extension supports LeetCode and HackerRank, with Codeforces and CodeChef coming soon. The Web Workspace can be used independently for any problem." },
-    { q: "Do I need a premium API key?", a: "The Free tier gives you basic access. Pro gives you access to premium models like GPT-4o, Claude 3.5 Sonnet, and DeepSeek V3 natively without needing your own API keys." },
+    { q: "Do I need a premium API key?", a: "The Free tier gives you basic access to DeepSeek V3 and Gemini 1.5 Pro. Pro gives you access to premium models like GPT-4o and Claude 3.5 Sonnet natively without needing your own API keys." },
     { q: "Will this get me banned on LeetCode?", a: "LeetMentor runs entirely locally in your browser and does not interfere with LeetCode's contest servers. However, we recommend avoiding its use during live rated contests." }
   ];
 

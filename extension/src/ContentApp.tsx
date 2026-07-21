@@ -25,6 +25,7 @@ const AI_MODES = [
 
 const MODELS = [
   { id: "deepseek/deepseek-chat", name: "DeepSeek V3", premium: false },
+  { id: "google/gemini-pro-1.5", name: "Gemini 1.5 Pro", premium: false },
   { id: "openai/gpt-4o", name: "GPT-4o", premium: true },
   { id: "anthropic/claude-3.5-sonnet", name: "Claude 3.5 Sonnet", premium: true }
 ];

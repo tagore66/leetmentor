@@ -196,6 +196,7 @@ export default function ChatBubble({
           <div className="mt-4 flex items-center gap-1.5 opacity-60">
             <div className="text-[11px] font-medium px-2 py-0.5 rounded bg-white/5 border border-white/10 uppercase tracking-wide">
               {model?.includes("deepseek") ? "DeepSeek V3" 
+                : model?.includes("gemini") ? "Gemini 1.5" 
                 : model?.includes("gpt") ? "GPT-4o" 
                 : model?.includes("claude") ? "Claude 3.5" 
                 : model?.includes("llama") ? "Llama 3" 
