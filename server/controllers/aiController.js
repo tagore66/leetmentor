@@ -97,7 +97,7 @@ CRITICAL RULES:
         if (selectedModel === "google/gemini-pro-1.5") {
             apiUrl = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
             apiToken = process.env.GEMINI_API_KEY;
-            requestModel = "gemini-1.5-pro";
+            requestModel = "gemini-flash-latest";
         }
 
         const response = await axios({
