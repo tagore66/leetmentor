@@ -98,6 +98,10 @@ CRITICAL RULES:
             apiUrl = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
             apiToken = process.env.GEMINI_API_KEY;
             requestModel = "gemini-flash-latest";
+            
+            if (!apiToken) {
+                throw new Error("GEMINI_API_KEY is not configured on the server. Please add it to your environment variables.");
+            }
         }
 
         const response = await axios({
@@ -220,10 +224,24 @@ CRITICAL RULES:
         });
 
     } catch (err) {
-        console.log(err.response?.data || err);
+        console.log("AI API Error:", err.response?.data || err.message);
+        
+        let errorMessage = "AI Error";
+        if (err.response?.data) {
+            if (Array.isArray(err.response.data) && err.response.data[0]?.error?.message) {
+                errorMessage = err.response.data[0].error.message;
+            } else if (err.response.data.error?.message) {
+                errorMessage = err.response.data.error.message;
+            } else if (typeof err.response.data === "string") {
+                errorMessage = err.response.data;
+            }
+        } else if (err.message) {
+            errorMessage = err.message;
+        }
+
         res.status(500).json({
             success: false,
-            message: err.response?.data?.error?.message || "AI Error",
+            message: errorMessage,
         });
     }
 };
